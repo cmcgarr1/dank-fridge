@@ -2,10 +2,9 @@ from __future__ import print_function
 import datetime
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-import sys
-import Adafruit_DHT
 import csv
 from googleapiclient import discovery
+import sys
 
 def read_csv_last_hour():
     current_time=datetime.datetime.now()
@@ -56,10 +55,7 @@ def batch_upload_to_sheets(data_to_write,last_row,worksheet):
     service = discovery.build('sheets', 'v4', credentials=c1)
 
     request = service.spreadsheets().values().batchUpdate(spreadsheetId='1Quk4qrT2VyGcxN74_93RLET46WDju2DBVZTOpcdFaao', body=batch_update_values_request_body)
-    #request = service.update_spreadsheet_value(spreadsheetId='1Quk4qrT2VyGcxN74_93RLET46WDju2DBVZTOpcdFaao', range_str, batch_update_values_request_body)
     response = request.execute()
-
-   #         service.update_spreadsheet_value(spreadsheet_id, range, value_range_object, value_input_option: 'USER_ENTERED')
 
 def next_available_row(worksheet):
     str_list = list(filter(None, worksheet.col_values(1)) ) # fastest
@@ -89,8 +85,6 @@ def main():
     next_row=next_available_row(worksheet)
 
     batch_upload_to_sheets(data_to_write,next_row,worksheet)
-
-    #worksheet.append_row((data_to_write))
 
 if __name__ == '__main__':
     main()
