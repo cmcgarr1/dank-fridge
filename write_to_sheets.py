@@ -33,7 +33,7 @@ def read_csv_last_hour():
     return data_to_write
 
 def batch_upload_to_sheets(data_to_write,last_row,worksheet):
-    range_str='Sheet1!A'+str(last_row)+':C'+str(last_row+len(data_to_write)-1)
+    range_str='Sheet1!A'+str(last_row)+':D'+str(last_row+len(data_to_write)-1)
 
     batch_update_values_request_body = {
 

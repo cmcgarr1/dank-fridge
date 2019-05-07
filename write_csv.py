@@ -32,9 +32,11 @@ def get_temp():
     return humidity, temperature
 
 def main():
+    now_time=datetime.datetime.now()
+    now_time_date=now_time.strftime('%x')
+    now_time_time=now_time.strftime('%X')
     temp_data=get_temp()
-    output_temp_value=[[str(datetime.datetime.now()),str(temp_data[0]),str(temp_data[1])]]
-    print(output_temp_value)
+    output_temp_value=[[now_time,str(temp_data[0]),str(temp_data[1]),now_time_date]]
     write_to_csv(output_temp_value)
 
 if __name__ == '__main__':
